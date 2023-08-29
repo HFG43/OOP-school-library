@@ -9,6 +9,6 @@ class Teacher < Person
   end
 
   def can_use_servicies?
-    puts true
+    return true
   end
 end
