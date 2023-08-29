@@ -21,7 +21,3 @@ class Person
     of_age? || @parent_permission
   end
 end
-
-per = Person.new(32, "xx")
-puts per.can_use_servicies?
-puts per.of_age?
