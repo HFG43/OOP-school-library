@@ -24,7 +24,7 @@
 
 # 📖 School Library<a name="about-project"></a>.
 
-**School Library** is a project usign Ruby to practice use of methods, class and modules, and apply best practices and Ruby styles while using Enumerable methods.
+**School Library** is a library app created using Ruby to practice OOP and apply best practices.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -41,11 +41,9 @@
 ### Key Features <a name="key-features"></a>
 
 - **Use Gitflow**
-- **Add enumerable.rb that is a module that contains the methods all?, any? and filter**
-- **Add my_list.rb that is a class that uses the enumerable module**
-- **Ruby linters**
-- **Work doing pair programming**
-
+- **Implement classes and objects**
+- **Use encapsulation and inheritance**
+- **Ruby styles reviewed with Rubocop Linters**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,16 +64,21 @@ Clone this repository to your desired folder:
 
 ### Usage
 
-To run the project, execute the following commands:
+To run the project, in your command line execute the following commands:
 
 ```sh
   bundle install
 ```
 
+To add a new student:
 ```sh
-  ruby decode.rb
+  ruby student.rb
 ```
 
+To add a new teacher:
+```sh
+  ruby teacher.rb
+```
 
 To check the linters you can use the command:
 
