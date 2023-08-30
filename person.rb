@@ -1,4 +1,6 @@
 require_relative 'nameable'
+require_relative 'capitalize'
+require_relative 'trimmer'
 
 class Person < Nameable
   attr_accessor :name, :age
@@ -14,7 +16,7 @@ class Person < Nameable
 
   def correct_name
     @name
-  end  
+  end
 
   private
 
@@ -28,6 +30,3 @@ class Person < Nameable
     of_age? || @parent_permission
   end
 end
-
-test = Person.new(30,'Pedro')
-puts test.correct_name
