@@ -1,6 +1,8 @@
 require_relative 'nameable'
 require_relative 'capitalize'
 require_relative 'trimmer'
+require_relative 'student'
+require_relative 'classroom'
 
 class Person < Nameable
   attr_accessor :name, :age

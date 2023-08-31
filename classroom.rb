@@ -9,6 +9,6 @@ class Classroom
 
   def add_student(student)
     @student.push(student) unless @student.include?(student)
-    student.Classroom = self
+    student.assign_classroom(self)
   end
 end

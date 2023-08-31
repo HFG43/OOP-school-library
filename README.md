@@ -44,6 +44,7 @@
 - **Implement classes and objects**
 - **Use encapsulation and inheritance**
 - **Ruby styles reviewed with Rubocop Linters**
+- **Use composition**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,7 +107,7 @@ To fix the linter use:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Add more enumerable methods**
+- [ ] **Associations**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
