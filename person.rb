@@ -3,6 +3,8 @@ require_relative 'capitalize'
 require_relative 'trimmer'
 require_relative 'student'
 require_relative 'classroom'
+require_relative 'book'
+require_relative 'rentals'
 
 class Person < Nameable
   attr_accessor :name, :age
@@ -31,5 +33,9 @@ class Person < Nameable
 
   def can_use_servicies?
     of_age? || @parent_permission
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental) unless @rentals.include?(rental)
   end
 end
