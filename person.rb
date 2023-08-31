@@ -4,7 +4,7 @@ require_relative 'trimmer'
 require_relative 'student'
 require_relative 'classroom'
 require_relative 'book'
-require_relative 'rentals'
+require_relative 'rental'
 
 class Person < Nameable
   attr_accessor :name, :age

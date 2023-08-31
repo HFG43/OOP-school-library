@@ -10,4 +10,5 @@ class Book
 
   def add_rental(rental)
     @rentals.push(rental) unless @rentals.include?(rental)
-end  
+  end
+end
