@@ -45,6 +45,7 @@
 - **Use encapsulation and inheritance**
 - **Ruby styles reviewed with Rubocop Linters**
 - **Use composition**
+- **Implement book & rental associations**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -107,7 +108,7 @@ To fix the linter use:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Associations**
+- [ ] **Include User Interface**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
