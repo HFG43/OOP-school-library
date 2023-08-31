@@ -11,4 +11,9 @@ class Students < Person
   def play_hooky
     puts '¯\(ツ)/¯'
   end
+
+  def assign_classroom(classroom)
+    @classroom = classroom
+    classroom.add_student(self)
+  end
 end
