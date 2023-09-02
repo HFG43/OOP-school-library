@@ -15,13 +15,13 @@ class App
 
   def list_all_books
     @books.each_with_index do |book, idx|
-      puts '\n#{idx}) Book title: #{book.title}, written by #{book.author}'
+      puts "\n#{idx}) Book title: #{book.title}, written by #{book.author}"
     end
   end
 
   def list_all_people
     @people.each_with_index do |person, idx|
-      puts '\n #{idx}) #{person.type} id: (#{person.id}) Name: #{person.name} age: #{person.age}'
+      puts "\n #{idx}) #{person.type} id: (#{person.id}) Name: #{person.name} age: #{person.age}"
     end
   end
 
@@ -112,7 +112,7 @@ class App
     id = gets.chomp.strip.to_i
 
     @rental.map do |rental|
-      puts '\n On #{rental.date} rental of #{rental.book.title}, by #{rental.book.author}' if rental.person.id == id
+      puts "\n On #{rental.date} rental of #{rental.book.title}, by #{rental.book.author}" if rental.person.id == id
     end
   end
 end
