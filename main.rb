@@ -14,24 +14,25 @@ def options_menu
 end
 
 def main
-  app = App.new()
+  app = App.new
 
-  puts "\n"
-  puts "Welcome to the School Library App!!"
-  puts "\n"
-  loop do options_menu
+  puts '\n'
+  puts 'Welcome to the School Library App!!'
+  puts '\n'
+  loop do
+    options_menu
     choice = gets.chomp.to_i
     case choice
-      when 1 then app.list_all_books
-      when 2 then app.list_all_people
-      when 3 then app.create_person
-      when 4 then app.create_a_book
-      when 5 then app.create_a_rental
-      when 6 then app.rental_person_id
-      when 7 then break
-      else puts "Invalid option, please try again!"
+    when 1 then app.list_all_books
+    when 2 then app.list_all_people
+    when 3 then app.create_person
+    when 4 then app.create_a_book
+    when 5 then app.create_a_rental
+    when 6 then app.rental_person_id
+    when 7 then break
+    else puts 'Invalid option, please try again!'
     end
   end
-end 
+end
 
 main
