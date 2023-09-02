@@ -46,6 +46,7 @@
 - **Ruby styles reviewed with Rubocop Linters**
 - **Use composition**
 - **Implement book & rental associations**
+- **Built interactive console app**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -69,19 +70,8 @@ Clone this repository to your desired folder:
 To run the project, in your command line execute the following commands:
 
 ```sh
-  bundle install
+  ruby main.rb
 ```
-
-To add a new student:
-```sh
-  ruby student.rb
-```
-
-To add a new teacher:
-```sh
-  ruby teacher.rb
-```
-
 To check the linters you can use the command:
 
 ```sh
@@ -108,7 +98,7 @@ To fix the linter use:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Include User Interface**
+- [ ] **Run tests**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
