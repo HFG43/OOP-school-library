@@ -34,10 +34,7 @@ def main
   loop do
     options_menu
     choice = gets.chomp.to_i
-    if choice == 7
-      exit
-    end
-
+    exit if choice == 7
     handle_menu_choice(choice, app)
   end
 end
