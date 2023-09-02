@@ -56,7 +56,7 @@ class App
     permission = (parent_permission == 'Y')
     @people.push(Students.new(classroom, type, age, name, parent_permission: permission))
     puts 'Student was created successfully'
-    puts '\n'
+    puts "\n"
   end
 
   def create_a_teacher
@@ -72,7 +72,7 @@ class App
 
     @people.push(Teacher.new(specialization, type, age, name))
     puts 'Teacher was created successfully'
-    puts '\n'
+    puts "\n"
   end
 
   def create_a_book
@@ -82,28 +82,28 @@ class App
     puts 'Book Author: '
     author = gets.chomp
     puts 'Book was created successfully'
-    puts '\n'
+    puts "\n"
 
     @books.push(Book.new(title, author))
   end
 
   def create_a_rental
     puts 'Select the book (index) for rent'
-    puts '\n'
+    puts "\n"
     list_all_books
     book = gets.chomp.to_i
 
     puts 'Select the person (index) that will rent the book'
-    puts '\n'
+    puts "\n"
     list_all_people
     person = gets.chomp.to_i
 
     puts 'Define the rental date: '
-    puts '\n'
+    puts "\n"
     date = gets.chomp
     @rental.push(Rental.new(date, @people[person], @books[book]))
     puts 'Rental was created successfully'
-    puts '\n'
+    puts "\n"
   end
 
   def rental_person_id
