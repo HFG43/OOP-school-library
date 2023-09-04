@@ -29,23 +29,24 @@ class App
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]'
     selected_person = gets.chomp.to_i
 
+    puts 'Name: '
+    name = gets.chomp
+
+    puts 'Age: '
+    age = gets.chomp
+
     if selected_person == 1
-      create_a_student
+      create_a_student(name, age)
     elsif selected_person == 2
-      create_a_teacher
+      create_a_teacher(name, age)
     else
       puts 'Option not recognized, please try another one'
       create_person
     end
   end
 
-  def create_a_student
+  def create_a_student(name, age)
     type = 'Student'
-    puts 'Age: '
-    age = gets.chomp.to_i
-
-    puts 'Name: '
-    name = gets.chomp
 
     puts 'Classroom: '
     classroom = gets.chomp
@@ -59,16 +60,10 @@ class App
     puts "\n"
   end
 
-  def create_a_teacher
+  def create_a_teacher(name, age)
     type = 'Teacher'
     puts 'Specialization: '
     specialization = gets.chomp
-
-    puts 'Name: '
-    name = gets.chomp
-
-    puts 'Age: '
-    age = gets.chomp
 
     @people.push(Teacher.new(specialization, type, age, name))
     puts 'Teacher was created successfully'
