@@ -28,8 +28,8 @@ class App
 
   def create_person
     selected_person = selected_person_input
-    name = get_person_name
-    age = get_person_age
+    name = obtain_person_name
+    age = obtain_person_age
 
     if selected_person == 1
       create_a_student(name, age)
@@ -56,7 +56,7 @@ class App
 
   def create_a_teacher(name, age)
     type = 'Teacher'
-    specialization = get_teacher_specialization
+    specialization = obtain_teacher_specialization
 
     @people.push(Teacher.new(specialization, type, age, name))
     puts 'Teacher was created successfully'
@@ -64,9 +64,9 @@ class App
   end
 
   def create_a_book
-    title = get_book_title
+    title = obtain_book_title
 
-    author = get_book_author
+    author = obtain_book_author
     puts 'Book was created successfully'
     puts "\n"
 
@@ -76,7 +76,7 @@ class App
   def create_a_rental
     book = select_book_for_rental
     person = select_who_will_rent
-    
+
     date = define_rental_date
     @rental.push(Rental.new(date, @people[person], @books[book]))
     puts 'Rental was created successfully'
