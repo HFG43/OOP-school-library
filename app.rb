@@ -1,3 +1,4 @@
+require_relative 'inputs'
 require_relative 'book'
 require_relative 'student'
 require_relative 'classroom'
@@ -26,14 +27,9 @@ class App
   end
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]'
-    selected_person = gets.chomp.to_i
-
-    puts 'Name: '
-    name = gets.chomp
-
-    puts 'Age: '
-    age = gets.chomp
+    selected_person = selected_person_input
+    name = get_person_name
+    age = get_person_age
 
     if selected_person == 1
       create_a_student(name, age)
@@ -48,12 +44,10 @@ class App
   def create_a_student(name, age)
     type = 'Student'
 
-    puts 'Classroom: '
-    classroom = gets.chomp
+    classroom = assign_student_classroom
     Classroom.new(classroom)
 
-    puts 'Has parent permission? [Y/N]:'
-    parent_permission = gets.chomp.capitalize
+    parent_permission = student_has_permission
     permission = (parent_permission == 'Y')
     @people.push(Students.new(classroom, type, age, name, parent_permission: permission))
     puts 'Student was created successfully'
@@ -62,8 +56,7 @@ class App
 
   def create_a_teacher(name, age)
     type = 'Teacher'
-    puts 'Specialization: '
-    specialization = gets.chomp
+    specialization = get_teacher_specialization
 
     @people.push(Teacher.new(specialization, type, age, name))
     puts 'Teacher was created successfully'
@@ -71,11 +64,9 @@ class App
   end
 
   def create_a_book
-    puts 'Book title: '
-    title = gets.chomp
+    title = get_book_title
 
-    puts 'Book Author: '
-    author = gets.chomp
+    author = get_book_author
     puts 'Book was created successfully'
     puts "\n"
 
@@ -83,28 +74,17 @@ class App
   end
 
   def create_a_rental
-    puts 'Select the book (index) for rent'
-    puts "\n"
-    list_all_books
-    book = gets.chomp.to_i
-
-    puts 'Select the person (index) that will rent the book'
-    puts "\n"
-    list_all_people
-    person = gets.chomp.to_i
-
-    puts 'Define the rental date: '
-    puts "\n"
-    date = gets.chomp
+    book = select_book_for_rental
+    person = select_who_will_rent
+    
+    date = define_rental_date
     @rental.push(Rental.new(date, @people[person], @books[book]))
     puts 'Rental was created successfully'
     puts "\n"
   end
 
   def rental_person_id
-    puts 'Select the person (id) to review its rentals'
-    list_all_people
-    id = gets.chomp.strip.to_i
+    id = select_person_id_for_rentals
 
     @rental.map do |rental|
       puts "\n On #{rental.date} rental of #{rental.book.title}, by #{rental.book.author}" if rental.person.id == id
