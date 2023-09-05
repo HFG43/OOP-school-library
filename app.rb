@@ -4,6 +4,7 @@ require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
 require_relative 'rental'
+require 'json'
 
 class App
   attr_accessor :books, :people, :rental
@@ -12,9 +13,13 @@ class App
     @books = []
     @people = []
     @rental = []
+    @taked_book = []
   end
 
   def list_all_books
+    if @books == []
+      read_file_book 
+    end
     @books.each_with_index do |book, idx|
       puts "\n#{idx}) Book title: #{book.title}, written by #{book.author}"
     end
@@ -71,6 +76,8 @@ class App
     puts "\n"
 
     @books.push(Book.new(title, author))
+    @taked_book.push({title: title, author: author})
+    self.write_file_book(@taked_book)
   end
 
   def create_a_rental
@@ -88,6 +95,34 @@ class App
 
     @rental.map do |rental|
       puts "\n On #{rental.date} rental of #{rental.book.title}, by #{rental.book.author}" if rental.person.id == id
+    end
+  end
+
+  def write_file_book(taked_book)
+
+    json_file = JSON.generate(@taked_book)
+    if (File.exist?("books.json"))
+      File.write("books.json", json_file)
+    else
+      file_name = "books.json"
+      file = File.open(file_name)
+      File.write(file_name, json_file)
+    end
+  end
+
+  def read_file_book
+    if (File.exist?("books.json"))
+      file_name = "books.json"
+      file = File.open(file_name)
+      take_data = File.read("books.json")
+      @taked_book = JSON.parse(take_data)
+      self.convert_book
+    end
+  end
+
+  def convert_book
+    @taked_book.each do |i|
+      @books.push(Book.new(i["title"], i["author"]))
     end
   end
 end
