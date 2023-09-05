@@ -1,0 +1,6 @@
+Prueba 1, test 1
+Prueba 2, test 2
+Prueba 3, test 3
+Ultima prueba, test 4
+Agregado 1, test 1
+Agregado 1, test 1{:foo=>0, :bar=>"s", :baz=>:bat}
