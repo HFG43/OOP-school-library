@@ -47,6 +47,7 @@
 - **Use composition**
 - **Implement book & rental associations**
 - **Built interactive console app**
+- **Make sure it use SOLID, YAGNI, KISS, DRY principles**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -94,11 +95,18 @@ To fix the linter use:
 - Twitter: [@twitterhandle](https://twitter.com/HFG_43)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/hern%C3%A1n-g%C3%BCemes-a440591b/)
 
+👤 **Franck Sefu**
+
+- GitHub: [francksefu](https://github.com/francksefu)
+- Twitter: [francksefu](https://twitter.com/franck_sefu)
+- LinkedIn: [francksefu](https://www.linkedin.com/in/franck-sefu/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] **Run tests**
+- [ ] **Preserve data**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
