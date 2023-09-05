@@ -7,17 +7,17 @@ def selected_person_input
 end
 
 def get_person_name
-  puts 'Name: '
+  puts 'Name of person: '
   gets.chomp
 end
 
 def get_person_age
-  puts 'Age: '
+  puts 'Age of person: '
   gets.chomp
 end
 
 def assign_student_classroom
-  puts 'Classroom: '
+  puts 'student classroom: '
   gets.chomp
 end 
 
