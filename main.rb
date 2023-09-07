@@ -1,5 +1,5 @@
 require_relative 'app'
-require_relative 'manage_data'
+
 
 def options_menu
   puts 'Please choose your menu option!'
@@ -36,7 +36,6 @@ def main
     options_menu
     choice = gets.chomp.to_i
     if choice == 7
-      app.save_people_data
       exit
     end
     handle_menu_choice(choice, app)
