@@ -1,0 +1,1 @@
+[{"specialization":"dec","type":"Teacher","age":"24","name":"earl","id":705},{"classroom":"3","type":"Student","age":"34","name":"des","id":778,"parent_permission":true},{"specialization":"des","type":"Teacher","age":"24","name":"frav","id":69},{"classroom":"4","type":"Student","age":"33","name":"dev","id":756,"parent_permission":true}]

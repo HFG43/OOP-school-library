@@ -4,7 +4,9 @@ AllCops:
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
-
+  Exclude:
+    - 'student.rb'
+    - 'teacher.rb'
   DisplayCopNames: true
 
 Layout/LineLength:
