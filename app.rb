@@ -1,5 +1,6 @@
 require_relative 'inputs'
 require_relative 'book'
+require_relative 'manage_data'
 require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
@@ -8,12 +9,17 @@ require 'json'
 
 class App
   attr_accessor :books, :people, :rental
-
+ 
   def initialize
+    @data_manager = Data_manager.new
     @books = []
-    @people = []
+    @people = @data_manager.read_file_people
     @rental = []
     @taked_book = []
+  end
+  
+  def save_people_data
+    @data_manager.write_file_people(@people)
   end
 
   def list_all_books
@@ -54,7 +60,8 @@ class App
 
     parent_permission = student_has_permission
     permission = (parent_permission == 'Y')
-    @people.push(Students.new(classroom, type, age, name, parent_permission: permission))
+    new_student = Students.new(classroom, type, age, name, parent_permission: permission)
+    @people << new_student
     puts 'Student was created successfully'
     puts "\n"
   end
@@ -63,7 +70,9 @@ class App
     type = 'Teacher'
     specialization = obtain_teacher_specialization
 
-    @people.push(Teacher.new(specialization, type, age, name))
+    new_teacher = Teacher.new(specialization, type, age, name)
+    @people << new_teacher
+  
     puts 'Teacher was created successfully'
     puts "\n"
   end

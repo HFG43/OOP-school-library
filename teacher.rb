@@ -11,4 +11,13 @@ class Teacher < Person
   def can_use_servicies?
     true
   end
+
+  def hash_structure
+    {
+      specialization: @specialization,
+      type: "Teacher",
+      age: @age,
+      name: @name,
+    }
+  end 
 end

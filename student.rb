@@ -16,4 +16,14 @@ class Students < Person
     @classroom = classroom
     classroom.add_student(self)
   end
+
+  def hash_structure
+    {
+      classroom: @classroom,
+      type: "Student",
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission,
+    }
+  end  
 end

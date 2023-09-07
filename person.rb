@@ -39,4 +39,16 @@ class Person < Nameable
   def add_rental(rental)
     @rentals.push(rental) unless @rentals.include?(rental)
   end
+
+  def hash_structure
+    {
+      name: @name,
+      age: @age,
+    }
+  end
+
+  def from_hash(people_data)
+    name = people_data['name']
+    age = people_data['age']
+  end  
 end
