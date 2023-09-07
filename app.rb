@@ -1,6 +1,6 @@
 require_relative 'inputs'
 require_relative 'book'
-#require_relative 'manage_data'
+require_relative 'inputs_output'
 require_relative 'student'
 require_relative 'classroom'
 require_relative 'teacher'
@@ -8,6 +8,7 @@ require_relative 'rental'
 require 'json'
 
 class App
+  include InputOutput
   attr_accessor :books, :people, :rental
  
   def initialize
@@ -19,10 +20,6 @@ class App
     @taked_people = []
     @taked_rental = []
   end
-  
-  #def save_people_data
-   # @data_manager.write_file_people(@people)
-  #end
 
   def list_all_books
     if @books == []
@@ -43,6 +40,9 @@ class App
   end
 
   def create_person
+    if @people == []
+      read_file_people 
+    end
     selected_person = selected_person_input
     name = obtain_person_name
     age = obtain_person_age
@@ -62,12 +62,11 @@ class App
 
     classroom = assign_student_classroom
     Classroom.new(classroom)
-
     parent_permission = student_has_permission
     permission = (parent_permission == 'Y')
     @people.push(Students.new(classroom, type, age, name, 1, parent_permission: permission))
-    @taked_people.push({classroom: classroom, type: type, name: name, id: 1, parent_permission: permission})
-    write_file_people(@taked_people)
+    @taked_people.push({classroom: classroom, type: type, age: age, name: name, id: @people.last.id, parent_permission: permission})
+    write_file(@taked_people, "people.json")
     puts 'Student was created successfully'
     puts "\n"
   end
@@ -77,8 +76,8 @@ class App
     specialization = obtain_teacher_specialization
 
     @people.push(Teacher.new(specialization, type, age, name, 1))
-    @taked_people.push({specialization: specialization, type: type, age: age, name: name, id: 1})
-    write_file_people(@taked_people)
+    @taked_people.push({specialization: specialization, type: type, age: age, name: name, id: @people.last.id})
+    write_file(@taked_people, "people.json")
     puts 'Teacher was created successfully'
     puts "\n"
   end
@@ -95,7 +94,7 @@ class App
 
     @books.push(Book.new(title, author))
     @taked_book.push({title: title, author: author})
-    self.write_file_book(@taked_book)
+    self.write_file(@taked_book, "books.json")
   end
 
   def create_a_rental
@@ -115,7 +114,7 @@ class App
       @taked_rental.push({date: date, book: {title: @books[book].title, author: @books[book].author}, person: {name: @people[person].name, age: @people[person].age, id: @people[person].id, type: @people[person].type, classroom: @people[person].classroom, permission: @people[person].parent_permission}})
     end
     
-    write_file_rental(@taked_rental)
+    write_file(@taked_rental, "rentals.json")
   end
 
   def rental_person_id
@@ -126,102 +125,6 @@ class App
 
     @rental.map do |rental|
       puts "\n On #{rental.date} rental of #{rental.book.title}, by #{rental.book.author}" if rental.person.id == id
-    end
-  end
-
-  def write_file_book(taked_book)
-
-    json_file = JSON.generate(taked_book)
-    if (File.exist?("books.json"))
-      File.write("books.json", json_file)
-    else
-      file_name = "books.json"
-      file = File.open(file_name)
-      File.write(file_name, json_file)
-    end
-  end
-
-  def read_file_book
-    if (File.exist?("books.json"))
-      file_name = "books.json"
-      file = File.open(file_name)
-      take_data = File.read("books.json")
-      @taked_book = JSON.parse(take_data)
-      self.convert_book
-    end
-  end
-
-  def convert_book
-    @taked_book.each do |i|
-      @books.push(Book.new(i["title"], i["author"]))
-    end
-  end
-  #Write peoples
-  def write_file_people(taked_people)
-
-    json_file = JSON.generate(taked_people)
-    if (File.exist?("people.json"))
-      File.write("people.json", json_file)
-    else
-      file_name = "people.json"
-      file = File.open(file_name)
-      File.write(file_name, json_file)
-    end
-  end
-
-  def read_file_people
-    if (File.exist?("people.json"))
-      file_name = "people.json"
-      file = File.open(file_name)
-      take_data = File.read("people.json")
-      @taked_people = JSON.parse(take_data)
-      self.convert_people
-    end
-  end
-
-  def convert_people
-    @taked_people.each do |i|
-      if i["type"] == 'Teacher'
-        @people.push(Teacher.new(i["specialization"], i["type"], i["age"], i["name"], i["id"]))
-      else
-        @people.push(Students.new(i["classroom"], i["type"], i["age"], i["name"], i["id"], i["parent_permission"]))
-      end
-    
-    end
-  end
-
-
-
-  #write rental in file rentals
-  def write_file_rental(taked_rental)
-
-    json_file = JSON.generate(taked_rental)
-    if (File.exist?("rentals.json"))
-      File.write("rentals.json", json_file)
-    else
-      file_name = "rentals.json"
-      file = File.open(file_name)
-      File.write(file_name, json_file)
-    end
-  end
-
-  def read_file_rental
-    if (File.exist?("rentals.json"))
-      file_name = "rentals.json"
-      file = File.open(file_name)
-      take_data = File.read("rentals.json")
-      @taked_rental = JSON.parse(take_data)
-      self.convert_rental
-    end
-  end
-
-  def convert_rental
-    @taked_rental.each do |i|
-      if i["person"].type == 'Student'
-        @rental.push(Rental.new(i.date, Students.new(i["person"].classroom, i["person"].type, i["person"].age, i["person"].name, i["person"].id, i["person"].permission), Book.new(i.book.title, i.book.author)))
-      else
-        @rental.push(Rental.new(i.date, Teacher.new(i["person"].specialization, i["person"].type, i["person"].age, i["person"].name,i["person"].id), Book.new(i.book.title, i.book.author)))
-      end
     end
   end
 
