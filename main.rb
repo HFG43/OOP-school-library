@@ -1,4 +1,5 @@
 require_relative 'app'
+require_relative 'manage_data'
 
 def options_menu
   puts 'Please choose your menu option!'
@@ -26,7 +27,7 @@ end
 
 def main
   app = App.new
-
+  
   puts "\n"
   puts 'Welcome to the School Library App!!'
   puts "\n"
@@ -34,7 +35,10 @@ def main
   loop do
     options_menu
     choice = gets.chomp.to_i
-    exit if choice == 7
+    if (choice == 7)
+      app.save_people_data
+      exit
+    end  
     handle_menu_choice(choice, app)
   end
 end
