@@ -15,11 +15,11 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
-    if id == 1
-      @id = Random.rand(1..1000)
-    else
-      @id = id
-    end
+    @id = if id == 1
+            Random.rand(1..1000)
+          else
+            id
+          end
     @type = type
     @rentals = []
   end
@@ -43,16 +43,4 @@ class Person < Nameable
   def add_rental(rental)
     @rentals.push(rental) unless @rentals.include?(rental)
   end
-
-  def hash_structure
-    {
-      name: @name,
-      age: @age,
-    }
-  end
-
-  def from_hash(people_data)
-    name = people_data['name']
-    age = people_data['age']
-  end  
 end

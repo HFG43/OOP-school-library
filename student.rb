@@ -3,7 +3,7 @@ require_relative 'person'
 class Students < Person
   attr_reader :classroom, :parent_permission
 
-  def initialize(classroom, type, age, name = 'Unknown',id = 1, parent_permission: true)
+  def initialize(classroom, type, age, name = 'Unknown', id = 1, parent_permission: true)
     super(type, age, name, id, parent_permission: parent_permission)
     @classroom = classroom
   end
@@ -20,10 +20,10 @@ class Students < Person
   def hash_structure
     {
       classroom: @classroom,
-      type: "Student",
+      type: 'Student',
       age: @age,
       name: @name,
-      parent_permission: @parent_permission,
+      parent_permission: @parent_permission
     }
-  end  
+  end
 end

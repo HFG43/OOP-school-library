@@ -27,7 +27,7 @@ end
 
 def main
   app = App.new
-  
+
   puts "\n"
   puts 'Welcome to the School Library App!!'
   puts "\n"
@@ -35,10 +35,10 @@ def main
   loop do
     options_menu
     choice = gets.chomp.to_i
-    if (choice == 7)
+    if choice == 7
       app.save_people_data
       exit
-    end  
+    end
     handle_menu_choice(choice, app)
   end
 end
