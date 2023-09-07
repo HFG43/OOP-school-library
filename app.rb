@@ -14,6 +14,7 @@ class App
     @people = []
     @rental = []
     @taked_book = []
+    @taked_rental = []
   end
 
   def list_all_books
@@ -54,7 +55,7 @@ class App
 
     parent_permission = student_has_permission
     permission = (parent_permission == 'Y')
-    @people.push(Students.new(classroom, type, age, name, parent_permission: permission))
+    @people.push(Students.new(classroom, type, age, name, 1, parent_permission: permission))
     puts 'Student was created successfully'
     puts "\n"
   end
@@ -63,12 +64,15 @@ class App
     type = 'Teacher'
     specialization = obtain_teacher_specialization
 
-    @people.push(Teacher.new(specialization, type, age, name))
+    @people.push(Teacher.new(specialization, type, age, name, 1))
     puts 'Teacher was created successfully'
     puts "\n"
   end
 
   def create_a_book
+    if @books == []
+      read_file_book 
+    end
     title = obtain_book_title
 
     author = obtain_book_author
@@ -81,6 +85,9 @@ class App
   end
 
   def create_a_rental
+    if @rental == []
+      read_file_rental 
+    end
     book = select_book_for_rental
     person = select_who_will_rent
 
@@ -88,9 +95,19 @@ class App
     @rental.push(Rental.new(date, @people[person], @books[book]))
     puts 'Rental was created successfully'
     puts "\n"
+    if @people[person].type == 'Teacher'
+      @taked_rental.push({date: date, book: {title: @books[book].title, author: @books[book].author}, person: {name: @people[person].name, age: @people[person].age, id: @people[person].id, type: @people[person].type, specialization: @people[person].specialization}})
+    else
+      @taked_rental.push({date: date, book: {title: @books[book].title, author: @books[book].author}, person: {name: @people[person].name, age: @people[person].age, id: @people[person].id, type: @people[person].type, classroom: @people[person].classroom, permission: @people[person].parent_permission}})
+    end
+    
+    write_file_rental(@taked_rental)
   end
 
   def rental_person_id
+    if @rental == []
+      read_file_rental 
+    end
     id = select_person_id_for_rentals
 
     @rental.map do |rental|
@@ -100,7 +117,7 @@ class App
 
   def write_file_book(taked_book)
 
-    json_file = JSON.generate(@taked_book)
+    json_file = JSON.generate(taked_book)
     if (File.exist?("books.json"))
       File.write("books.json", json_file)
     else
@@ -125,4 +142,38 @@ class App
       @books.push(Book.new(i["title"], i["author"]))
     end
   end
+
+  #write rental in file rentals
+  def write_file_rental(taked_rental)
+
+    json_file = JSON.generate(taked_rental)
+    if (File.exist?("rentals.json"))
+      File.write("rentals.json", json_file)
+    else
+      file_name = "rentals.json"
+      file = File.open(file_name)
+      File.write(file_name, json_file)
+    end
+  end
+
+  def read_file_rental
+    if (File.exist?("rentals.json"))
+      file_name = "rentals.json"
+      file = File.open(file_name)
+      take_data = File.read("rentals.json")
+      @taked_rental = JSON.parse(take_data)
+      self.convert_rental
+    end
+  end
+
+  def convert_rental
+    @taked_rental.each do |i|
+      if i["person"].type == 'Student'
+        @rental.push(Rental.new(i.date, Students.new(i["person"].classroom, i["person"].type, i["person"].age, i["person"].name, i["person"].id, i["person"].permission), Book.new(i.book.title, i.book.author)))
+      else
+        @rental.push(Rental.new(i.date, Teacher.new(i["person"].specialization, i["person"].type, i["person"].age, i["person"].name,i["person"].id), Book.new(i.book.title, i.book.author)))
+      end
+    end
+  end
+
 end

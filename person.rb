@@ -7,15 +7,19 @@ require_relative 'book'
 require_relative 'rental'
 
 class Person < Nameable
-  attr_accessor :name, :age, :type
-  attr_reader :id, :rentals
+  attr_accessor :name, :age, :type, :id
+  attr_reader :rentals
 
-  def initialize(type, age, name = 'Unknown', parent_permission: true)
+  def initialize(type, age, name = 'Unknown', id = 1, parent_permission: true)
     super()
     @age = age
     @name = name
     @parent_permission = parent_permission
-    @id = Random.rand(1..1000)
+    if id == 1
+      @id = Random.rand(1..1000)
+    else
+      @id = id
+    end
     @type = type
     @rentals = []
   end
