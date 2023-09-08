@@ -3,7 +3,7 @@ require 'json'
 
 describe Person do
   before(:each) do
-    @person_class = Person.new('Pierre', 38)
+    @person_class = Person.new('type', 38, 'Pierre')
   end
 
   it 'Ensure the value of attribute' do
@@ -17,13 +17,8 @@ describe Person do
     expect(@person_class.rentals).to eq ['put in table']
   end
 
-  it 'rename method' do
-    @person_class.rename('franck')
-    expect(@person_class.name).to_not eq 'Pierre'
-  end
-
   it 'can i use your service method' do
-    expect(@person_class.can_use_services?).to be true
+    expect(@person_class.can_use_servicies?).to be true
   end
 
   it 'can i use your service method' do

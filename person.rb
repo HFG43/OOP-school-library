@@ -1,13 +1,8 @@
 require_relative 'nameable'
-require_relative 'capitalize'
-require_relative 'trimmer'
-require_relative 'student'
-require_relative 'classroom'
-require_relative 'book'
-require_relative 'rental'
+
 
 class Person < Nameable
-  attr_accessor :name, :age, :type, :id
+  attr_accessor :name, :age, :type, :id, :parent_permission
   attr_reader :rentals
 
   def initialize(type, age, name = 'Unknown', id = 1, parent_permission: true)
@@ -28,12 +23,6 @@ class Person < Nameable
     @name
   end
 
-  private
-
-  def of_age?
-    @age.to_i >= 18
-  end
-
   public
 
   def can_use_servicies?
@@ -42,5 +31,11 @@ class Person < Nameable
 
   def add_rental(rental)
     @rentals.push(rental) unless @rentals.include?(rental)
+  end
+
+  private
+
+  def of_age?
+    @age.to_i >= 18
   end
 end
