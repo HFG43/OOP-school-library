@@ -8,11 +8,3 @@ describe Nameable do
     end 
   end  
 end
-
-# end  
-
-# class Nameable
-#   def correct_name
-#     raise NotImplementedError, 'Error'
-#   end
-# end
