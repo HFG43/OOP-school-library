@@ -9,7 +9,7 @@ class Students < Person
   end
 
   def play_hooky
-    puts '¯\(ツ)/¯'
+     '¯\(ツ)/¯'
   end
 
   def assign_classroom(classroom)

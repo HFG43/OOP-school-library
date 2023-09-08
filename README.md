@@ -48,6 +48,8 @@
 - **Implement book & rental associations**
 - **Built interactive console app**
 - **Make sure it use SOLID, YAGNI, KISS, DRY principles**
+- **Preserve data**
+- **Run Unit tests using Rspec**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,8 +107,7 @@ To fix the linter use:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Run tests**
-- [ ] **Preserve data**
+- [ ] **Add Delete and Update options for stored data**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
