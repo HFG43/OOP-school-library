@@ -7,7 +7,7 @@ require 'date'
 describe Rental do
   let(:person) { Person.new('Student', 15, 'HFG') }
   let(:book) { Book.new('Jump', 'Van Halen') }
-  let(:date) { Date.new(2024, 01, 01) }
+  let(:date) { Date.new(2024, 0o1, 0o1) }
   let(:rental) { Rental.new(date, person, book) }
 
   describe '#initialize' do

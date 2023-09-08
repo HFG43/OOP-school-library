@@ -1,6 +1,5 @@
 require_relative 'nameable'
 
-
 class Person < Nameable
   attr_accessor :name, :age, :type, :id, :parent_permission
   attr_reader :rentals
@@ -22,8 +21,6 @@ class Person < Nameable
   def correct_name
     @name
   end
-
-  public
 
   def can_use_servicies?
     of_age? || @parent_permission
